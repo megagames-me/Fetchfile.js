@@ -11,7 +11,7 @@ else if ($ == undefined) {
 	throw new Error("Fetchfile.js requires jQuery to work.");
 }
 function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, saveto, callback) {
-	const outputTypes = [false, "text", "html", "css", "js"];
+	const outputTypes = [false, "text", "html", "css", "js", "json"];
 	const whitespaceTypes = ["pre", "br", false];
 	var checkedOutputType = false;
 	var checkedWhitespaceType = false;
@@ -37,7 +37,7 @@ function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, savet
 			}
 		}
 		if (checkedOutputType == false) {
-			throw new TypeError("The outputType specified (" + outputType + ") does not match the outputTypes supported. Fetchfile.js supports false (boolean), text, html, css, and js.");
+			throw new TypeError("The outputType specified (" + outputType + ") does not match the outputTypes supported. Fetchfile.js supports false (boolean), text, html, css, js, and json.");
 		}
 	}
 
@@ -72,10 +72,10 @@ function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, savet
 			method: "POST",
 			success: function (result) {
 				if (whitespaceType == "br") {
-					var returnResult = result.replace(/(\r\n|\n|\r)/gm, "<br />");
+					var returnResult = String(result).replace(/(\r\n|\n|\r)/gm, "<br />");
 				}
 				if (whitespaceType == false) {
-					var returnResult = result.replace(/(\r\n|\n|\r)/gm);
+					var returnResult = String(result).replace(/(\r\n|\n|\r)/gm);
 				}
 				if (returnId !== false) {
 					if (outputType == "text") {
@@ -86,17 +86,20 @@ function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, savet
 					}
 				}
 				if (outputType == "css") {
-					document.head.innerHTML += "<style>" + result + "</style>";
+					document.head.innerHTML += "<style>" + String(result) + "</style>";
 				}
 				if (outputType == "js") {
-					result.replace(":newline", "\n");
+					String(result).replace(":newline", "\n");
 					function jsfunction(result) {
 						eval(result);
 					}
 					jsfunction(result);
 				}
 				if (saveto !== undefined && saveto !== false) {
-					var resultsaveto = result.replace(/(\r\n|\n|\r)/gm, ":FETCHFILE_NEWLINE:");
+					if (outputType !== "json") {
+						var resultsaveto = result.replace(/(\r\n|\n|\r)/gm, ":FETCHFILE_NEWLINE:");
+					}
+
 					try {
 						eval(saveto + " = \"" + resultsaveto + "\";");
 					}
@@ -120,12 +123,13 @@ function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, savet
 			url: filepath,
 			method: "POST",
 			success: function (result) {
+
 				if (result !== "FETCH_ERRORID_NOT_SECURE_FETCH") {
 					if (whitespaceType == "br") {
-						var returnResult = result.replace(/(\r\n|\n|\r)/gm, "<br />");
+						var returnResult = String(result).replace(/(\r\n|\n|\r)/gm, "<br />");
 					}
 					if (whitespaceType == false) {
-						var returnResult = result.replace(/(\r\n|\n|\r)/gm);
+						var returnResult = String(result).replace(/(\r\n|\n|\r)/gm);
 					}
 					if (returnId !== false) {
 						if (outputType == "text") {
@@ -136,17 +140,20 @@ function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, savet
 						}
 					}
 					if (outputType == "css") {
-						document.head.innerHTML += "<style>" + result + "</style>";
+						document.head.innerHTML += "<style>" + String(result) + "</style>";
 					}
 					if (outputType == "js") {
-						result.replace(":newline", "\n");
+						String(result).replace(":newline", "\n");
 						function jsfunction(result) {
 							eval(result);
 						}
 						jsfunction(result);
 					}
 					if (saveto !== undefined && saveto !== false) {
-						var resultsaveto = result.replace(/(\r\n|\n|\r)/gm, ":FETCHFILE_NEWLINE:");
+						if (outputType !== "json") {
+							var resultsaveto = result.replace(/(\r\n|\n|\r)/gm, ":FETCHFILE_NEWLINE:");
+						}
+
 						try {
 							eval(saveto + " = \"" + resultsaveto + "\";");
 						}
@@ -172,5 +179,3 @@ function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, savet
 	}
 
 }
-
-
