@@ -4,7 +4,6 @@
 // Licensed under the Unlicense //
 // See more at unlicense.org    //
 ///////////////////////////////////
-
 if ($.ajax == undefined && $ !== undefined) {
 	throw new Error("Fetchfile.js requires the full version of jQuery. Fetchfile.js does not support jQuery Slim.");
 }
@@ -41,9 +40,9 @@ function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, savet
 			throw new TypeError("The outputType specified (" + outputType + ") does not match the outputTypes supported. Fetchfile.js supports false (boolean), text, html, css, and js.");
 		}
 	}
-	
+
 	if (outputType == "text" && (returnId == undefined || returnId == false)) {
-		console.warn("Fetchfile.js does not require an outputType to be specified if you are not printing the output to an element. Please use the boolean false instead of " + outputType + ". If you are trying to fetch JavaScript, use outputType js. Attribute returnId is not required when attribute outputType is not equal to text.");
+		console.warn("Fetchfile.js does not require an outputType to be specified if you are not printing the output to an element. Please use the boolean false instead of " + outputType + ". If you are trying to fetch JavaScript, use outputType js. Parameter returnId is not required when parameter outputType is not equal to text.");
 	}
 	if (whitespaceType !== undefined) {
 		for (var i = 0; i < whitespaceTypes.length; i++) {
@@ -56,7 +55,7 @@ function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, savet
 		}
 	}
 	if (whitespaceType == "br" && outputType == "text") {
-		console.warn("It is not ideal to set attribute whitespaceType to \"br\" and outputType to \"text\". Your output will have the text <br /> in it.");
+		console.warn("It is not ideal to set parameter whitespaceType to \"br\" and outputType to \"text\". Your output will have the text <br /> in it.");
 	}
 	if ($(returnId).length == 0 && returnId !== false) {
 		throw new Error("The returnId specified (" + returnId + ") does not go to any HTML element.");
@@ -122,12 +121,18 @@ function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, savet
 			method: "POST",
 			success: function (result) {
 				if (result !== "FETCH_ERRORID_NOT_SECURE_FETCH") {
+					if (whitespaceType == "br") {
+						var returnResult = result.replace(/(\r\n|\n|\r)/gm, "<br />");
+					}
+					if (whitespaceType == false) {
+						var returnResult = result.replace(/(\r\n|\n|\r)/gm);
+					}
 					if (returnId !== false) {
 						if (outputType == "text") {
-							$(returnId).text(result);
+							$(returnId).text(returnResult);
 						}
 						if (outputType == "html") {
-							$(returnId).html(result);
+							$(returnId).html(returnResult);
 						}
 					}
 					if (outputType == "css") {
@@ -155,7 +160,7 @@ function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, savet
 					}
 				}
 				else {
-					throw new TypeError("The filepath specified (" + filepath + ") requires a secure fetchfile call.");
+					throw new TypeError("The filepath specified (" + filepath + ") requires a secure Fetchfile.js call.");
 
 				}
 			},
@@ -167,4 +172,5 @@ function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, savet
 	}
 
 }
+
 
