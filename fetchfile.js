@@ -1,8 +1,8 @@
 ///////////////////////////////////
 // Fetchfile.js                  //
 // Code by Anvay Mathur          //
-// Licensed under the Unilicense //
-// See more at unilicense.org    //
+// Licensed under the Unlicense //
+// See more at unlicense.org    //
 ///////////////////////////////////
 
 if ($.ajax == undefined && $ !== undefined) {
@@ -11,12 +11,14 @@ if ($.ajax == undefined && $ !== undefined) {
 else if ($ == undefined) {
 	throw new Error("Fetchfile.js requires jQuery to work.");
 }
-function Fetchfile(filepath, secure, outputType, returnId, saveto, callback) {
+function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, saveto, callback) {
 	const outputTypes = [false, "text", "html", "css", "js"];
+	const whitespaceTypes = ["pre", "br", false];
 	var checkedOutputType = false;
+	var checkedWhitespaceType = false;
 	var returntext = "";
 	if (filepath == undefined) {
-		throw new Error("The filepath parameter is empty. Requires filepath to requested content.");
+		throw new Error("The filepath parameter is empty. Requires filepath to request content.");
 
 	}
 	if (secure == undefined) {
@@ -25,6 +27,9 @@ function Fetchfile(filepath, secure, outputType, returnId, saveto, callback) {
 	if (secure !== true && secure !== false) {
 		throw new TypeError("The secure parameter specified (\"" + secure + "\") is not a boolean. Parameter secure requires boolean");
 
+	}
+	if (outputType == undefined) {
+		throw new TypeError("The outputType parameter is empty. Requires outputType to output content.");
 	}
 	if (outputType !== undefined) {
 		for (var i = 0; i < outputTypes.length; i++) {
@@ -36,15 +41,29 @@ function Fetchfile(filepath, secure, outputType, returnId, saveto, callback) {
 			throw new TypeError("The outputType specified (" + outputType + ") does not match the outputTypes supported. Fetchfile.js supports false (boolean), text, html, css, and js.");
 		}
 	}
+	
 	if (outputType == "text" && (returnId == undefined || returnId == false)) {
 		console.warn("Fetchfile.js does not require an outputType to be specified if you are not printing the output to an element. Please use the boolean false instead of " + outputType + ". If you are trying to fetch JavaScript, use outputType js. Attribute returnId is not required when attribute outputType is not equal to text.");
+	}
+	if (whitespaceType !== undefined) {
+		for (var i = 0; i < whitespaceTypes.length; i++) {
+			if (whitespaceTypes[i] == whitespaceType) {
+				checkedWhitespaceType = true;
+			}
+		}
+		if (checkedWhitespaceType == false) {
+			throw new TypeError("The whitespaceType specified (" + whitespaceType + ") does not match the whitespaceTypes supported. Fetchfile.js supports pre, br, and false (boolean).");
+		}
+	}
+	if (whitespaceType == "br" && outputType == "text") {
+		console.warn("It is not ideal to set attribute whitespaceType to \"br\" and outputType to \"text\". Your output will have the text <br /> in it.");
 	}
 	if ($(returnId).length == 0 && returnId !== false) {
 		throw new Error("The returnId specified (" + returnId + ") does not go to any HTML element.");
 
 	}
-	if ((returnId !== undefined && returnId !== false) && (outputType !== "text" && outputType !== false)) {
-		console.warn("Fetchfile.js does not require a returnId to be specified if you are not using outputType text. Please use the boolean false instead of " + outputType + ".");
+	if ((returnId !== undefined && returnId !== false) && ((outputType !== "text" && outputType !== "html") && outputType !== false)) {
+		console.warn("Fetchfile.js does not require a returnId to be specified if you are not using outputType text or html. Please use the boolean false instead of " + outputType + ".");
 	}
 
 	if (secure) {
@@ -53,12 +72,18 @@ function Fetchfile(filepath, secure, outputType, returnId, saveto, callback) {
 			data: { "id": "FETCHPOST" },
 			method: "POST",
 			success: function (result) {
+				if (whitespaceType == "br") {
+					var returnResult = result.replace(/(\r\n|\n|\r)/gm, "<br />");
+				}
+				if (whitespaceType == false) {
+					var returnResult = result.replace(/(\r\n|\n|\r)/gm);
+				}
 				if (returnId !== false) {
 					if (outputType == "text") {
-						$(returnId).text(result);
+						$(returnId).text(returnResult);
 					}
 					if (outputType == "html") {
-						$(returnId).html(result);
+						$(returnId).html(returnResult);
 					}
 				}
 				if (outputType == "css") {
@@ -142,3 +167,4 @@ function Fetchfile(filepath, secure, outputType, returnId, saveto, callback) {
 	}
 
 }
+
