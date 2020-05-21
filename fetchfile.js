@@ -95,11 +95,20 @@ function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, savet
 					}
 					jsfunction(result);
 				}
-				if (saveto !== undefined && saveto !== false) {
-					if (outputType !== "json") {
-						var resultsaveto = result.replace(/(\r\n|\n|\r)/gm, ":FETCHFILE_NEWLINE:");
-					}
 
+				if (saveto !== undefined && saveto !== false) {
+					var resultsaveto = result;
+					if (outputType !== "json") {
+						esultsaveto = result.replace(/(\r\n|\n|\r)/gm, ":FETCHFILE_NEWLINE:");
+					}
+					else if (outputType == "json" && typeof result !== "object") {
+						try {
+							resultsaveto = JSON.parse(result);
+						}
+						catch {
+							throw new TypeError("The outputType specified is \"json\", but the result was not a JSON object.");
+						}
+					}
 					try {
 						eval(saveto + " = \"" + resultsaveto + "\";");
 					}
@@ -149,11 +158,20 @@ function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, savet
 						}
 						jsfunction(result);
 					}
-					if (saveto !== undefined && saveto !== false) {
-						if (outputType !== "json") {
-							var resultsaveto = result.replace(/(\r\n|\n|\r)/gm, ":FETCHFILE_NEWLINE:");
-						}
 
+					if (saveto !== undefined && saveto !== false) {
+						var resultsaveto = result;
+						if (outputType !== "json") {
+							esultsaveto = result.replace(/(\r\n|\n|\r)/gm, ":FETCHFILE_NEWLINE:");
+						}
+						else if (outputType == "json" && typeof result !== "object") {
+							try {
+								resultsaveto = JSON.parse(result);
+							}
+							catch {
+								throw new TypeError("The outputType specified is \"json\", but the result was not a JSON object.");
+							}
+						}
 						try {
 							eval(saveto + " = \"" + resultsaveto + "\";");
 						}
