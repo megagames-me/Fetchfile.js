@@ -1,0 +1,7 @@
+/////////////////////////////////////////////////////////
+// THIS VERSION OF FETCHFILE.JS IS IN BETA             //
+// The Unilicense still applies to this piece of code. //
+// See more at the license page of this repository.    //
+//                                                     //
+// Code by Anvay Mathur                                //
+/////////////////////////////////////////////////////////
