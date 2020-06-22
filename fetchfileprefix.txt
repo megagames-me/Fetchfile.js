@@ -1,0 +1,17 @@
+///////////////////////////////////
+// Fetchfile.js, vnumber         //
+// Code by Anvay Mathur          //
+// Licensed under the Unlicense  //
+// See more at unlicense.org     //
+///////////////////////////////////
+
+Replace 'vnumber' with version number.
+Example:
+///////////////////////////////////
+// Fetchfile.js, v1.2.1          //
+// Code by Anvay Mathur          //
+// Licensed under the Unlicense  //
+// See more at unlicense.org     //
+///////////////////////////////////
+
+MAKE SURE THAT IT IS SPACED CORRECTLY
