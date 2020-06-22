@@ -1,8 +1,8 @@
 ///////////////////////////////////
-// Fetchfile.js                  //
+// Fetchfile.js, v1.2.1          //
 // Code by Anvay Mathur          //
-// Licensed under the Unlicense //
-// See more at unlicense.org    //
+// Licensed under the Unlicense  //
+// See more at unlicense.org     //
 ///////////////////////////////////
 if ($.ajax == undefined && $ !== undefined) {
 	throw new Error("Fetchfile.js requires the full version of jQuery. Fetchfile.js does not support jQuery Slim.");
