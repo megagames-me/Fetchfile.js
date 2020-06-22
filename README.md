@@ -1,5 +1,5 @@
 # Fetchfile.js
-[![version (v1.2.1)](https://img.shields.io/badge/version-v1.2.1-green.svg)](https://shields.io/) [![earliest stable version (v1.2.1)](https://img.shields.io/badge/earliest%20stable%20version-v1.2.1-red.svg)](https://shields.io/) [![ version in dev (v1.2.2-beta)](https://img.shields.io/badge/version%20in%20dev-v1.2.2--beta-yellow.svg)](https://shields.io/)
+[![version (v1.2.1)](https://img.shields.io/badge/version-v1.2.1-green.svg)](https://shields.io/) [![earliest stable version (v1.2.1)](https://img.shields.io/badge/earliest%20stable%20version-v1.2.1-red.svg)](https://shields.io/) [![version in dev (v1.2.2-beta)](https://img.shields.io/badge/version%20in%20dev-v1.2.2--beta-yellow.svg)](https://shields.io/) [![hits per month](https://data.jsdelivr.com/v1/package/gh/megagames-me/Fetchfile.js/badge)](https://www.jsdelivr.com/package/gh/megagames-me/Fetchfile.js)
 
 The simplest way to use Ajax for beginners.
 ## About
