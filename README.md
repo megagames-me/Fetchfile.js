@@ -1,7 +1,31 @@
 # Fetchfile.js
-[![version](https://img.shields.io/badge/version-v1.2.1-green.svg)](https://shields.io/)
+[![version (v1.2.1)](https://img.shields.io/badge/version-v1.2.1-green.svg)](https://shields.io/) [![earliest stable version (v1.2.1)](https://img.shields.io/badge/earliest%20stable%20version-v1.2.1-red.svg)](https://shields.io/) [![ version in dev (v1.2.2-beta)](https://img.shields.io/badge/version%20in%20dev-v1.2.2--beta-yellow.svg)](https://shields.io/)
 
 The simplest way to use Ajax for beginners.
+## About
+We all love Ajax, right? But, JavaScript just messed it up. You have to use the most annoying syntax ever: XMLHttpRequest, or XHR. It is an absolute *pain* to write it out. But, I decided to create a library that can fit XHR into *one* line of JS code. It is called Fetchfile.js.
+
+### Comparison
+#### XHR
+
+```javascript
+//XMLHttpRequest
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+	if (this.readyState == 4 && this.status == 200) {
+		document.getElementById("ajaxoutput").innerHTML = this.responseText;
+	}
+};
+xhttp.open("GET", "path/to/file.txt", true);
+xhttp.send();
+```
+
+#### Fetchfile.js
+
+```javascript
+Fetchfile("path/to/file.txt", false, "text", "#ajaxoutput");
+```
+They do the exact same thing, but one is by far the easiest to write.
 
 ## Installation
 ### npm
