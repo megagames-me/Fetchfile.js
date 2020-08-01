@@ -39,10 +39,13 @@ To import Fetchfile.js into your HTML project, use this code.
 <script type="text/javascript" src="//cdn.jsdelivr.net/gh/megagames-me/Fetchfile.js@1.2.1/fetchfile.min.js"></script>
 ```
 <hr />
+
 *Note:* If you want to, you can use the beta version here:
+
 ```html
 <script type="text/javascript" src="//gitcdn.link/cdn/megagames-me/Fetchfile.js/f6c5f716e3d84d9b3ef230a67322ed827509a76e/beta/fetchfile.js"></script>
 ```
+
 This is not recommended, as it uses the latest beta version. This, however, is NOT a release! It is just the file straight from GitHub raw. This may change, so this is **not** recommended for production usage.
 <hr />
 **Important:** Do NOT use jQuery Slim. jQuery Slim does not contain the `$.ajax` function, which Fetchfile.js requires.
