@@ -1,5 +1,5 @@
 ///////////////////////////////////
-// Fetchfile.js, v1.2.1          //
+// Fetchfile.js, v1.2.2          //
 // Code by Anvay Mathur          //
 // Licensed under the Unlicense  //
 // See more at unlicense.org     //
@@ -86,7 +86,7 @@ function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, savet
 					}
 				}
 				if (outputType == "css") {
-					document.head.innerHTML += "<style>" + String(result) + "</style>";
+					document.head.indnerHTML += "<style>" + String(result) + "</style>";
 				}
 				if (outputType == "js") {
 					String(result).replace(":newline", "\n");
@@ -99,14 +99,15 @@ function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, savet
 				if (saveto !== undefined && saveto !== false) {
 					var resultsaveto = result;
 					if (outputType !== "json") {
-						esultsaveto = result.replace(/(\r\n|\n|\r)/gm, ":FETCHFILE_NEWLINE:");
+						resultsaveto = result.replace(/(\r\n|\n|\r)/gm, ":FETCHFILE_NEWLINE:");
 					}
 					else if (outputType == "json" && typeof result !== "object") {
 						try {
 							resultsaveto = JSON.parse(result);
 						}
 						catch {
-							throw new TypeError("The outputType specified is \"json\", but the result was not a JSON object.");
+							console.warn("The outputType specified is \"json\", but the result was not a JSON object.");
+							return;
 						}
 					}
 					try {
@@ -114,6 +115,7 @@ function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, savet
 					}
 					catch {
 						console.warn("The file requested could not be saved into a variable. Check if the file being accessed uses the right type of quotes. (\', \")");
+						
 					}
 
 				}
@@ -122,7 +124,8 @@ function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, savet
 				}
 			},
 			error: function () {
-				console.warn("The Ajax call to " + filepath + " failed. Check your permission settings or if the file exists.");
+				console.warn("The secure Ajax call to " + filepath + " failed. Check your permission settings or if the file exists.");
+				return;
 
 			}
 		});
@@ -162,14 +165,15 @@ function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, savet
 					if (saveto !== undefined && saveto !== false) {
 						var resultsaveto = result;
 						if (outputType !== "json") {
-							esultsaveto = result.replace(/(\r\n|\n|\r)/gm, ":FETCHFILE_NEWLINE:");
+							resultsaveto = result.replace(/(\r\n|\n|\r)/gm, ":FETCHFILE_NEWLINE:");
 						}
 						else if (outputType == "json" && typeof result !== "object") {
 							try {
 								resultsaveto = JSON.parse(result);
 							}
 							catch {
-								throw new TypeError("The outputType specified is \"json\", but the result was not a JSON object.");
+								console.warn("The outputType specified is \"json\", but the result was not a JSON object.");
+								return;
 							}
 						}
 						try {
@@ -185,13 +189,13 @@ function Fetchfile(filepath, secure, outputType, whitespaceType, returnId, savet
 					}
 				}
 				else {
-					throw new TypeError("The filepath specified (" + filepath + ") requires a secure Fetchfile.js call.");
-
+					console.warn("The filepath specified (" + filepath + ") requires a secure Fetchfile.js call.");
+					return;
 				}
 			},
 			error: function () {
-				throw new Error("The Ajax call to " + filepath + " failed. Check your permission settings or if the file exists.");
-
+				console.warn("The Ajax call to " + filepath + " failed. Check your permission settings or if the file exists.");
+				return;
 			}
 		});
 	}
