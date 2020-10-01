@@ -6,6 +6,8 @@
 // Code by Anvay Mathur                                //
 /////////////////////////////////////////////////////////
 
+// There is no available Fetchfile.js Beta. Using Beta-1.2.2.
+
 if ($.ajax == undefined && $ !== undefined) {
 	throw new Error("Fetchfile.js requires the full version of jQuery. Fetchfile.js does not support jQuery Slim.");
 }
