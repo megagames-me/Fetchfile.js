@@ -1,5 +1,5 @@
 # Fetchfile.js
-[![version (v1.2.1)](https://img.shields.io/badge/version-v1.2.1-green.svg)](https://shields.io/) [![earliest stable version (v1.2.1)](https://img.shields.io/badge/earliest%20stable%20version-v1.2.1-red.svg)](https://shields.io/) [![version in dev (v1.2.2-beta)](https://img.shields.io/badge/version%20in%20dev-v1.2.2--beta-yellow.svg)](https://shields.io/) [![hits per month](https://data.jsdelivr.com/v1/package/gh/megagames-me/Fetchfile.js/badge)](https://www.jsdelivr.com/package/gh/megagames-me/Fetchfile.js)
+[![version (v1.2.2)](https://img.shields.io/badge/version-v1.2.2-green.svg)](https://shields.io/) [![earliest stable version (v1.2.2)](https://img.shields.io/badge/earliest%20stable%20version-v1.2.2-red.svg)](https://shields.io/) [![version in dev (None)](https://img.shields.io/badge/version%20in%20dev-None-yellow.svg)](https://shields.io/) [![hits per month](https://data.jsdelivr.com/v1/package/gh/megagames-me/Fetchfile.js/badge)](https://www.jsdelivr.com/package/gh/megagames-me/Fetchfile.js)
 
 The simplest way to use Ajax for beginners.
 ## About
@@ -36,7 +36,7 @@ To install Fetchfile.js on npm, run the command `npm i @megagames-me/Fetchfile.j
 To import Fetchfile.js into your HTML project, use this code.
 ```html
 <script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/gh/megagames-me/Fetchfile.js@1.2.1/fetchfile.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/megagames-me/Fetchfile.js@1.2.2/fetchfile.min.js"></script>
 ```
 <hr />
 
